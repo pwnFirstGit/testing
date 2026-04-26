@@ -1,6 +1,6 @@
 from urlextract import URLExtract
 from wordcloud import WordCloud
-impor pandas as pd
+import pandas as pd
 from collections import Counter
 import emoji
 
@@ -17,7 +17,7 @@ def extract_emojis(text: str):
             pass
 
     # Fallback: regex extractor available in many versions
-    f hasattr(emoji, 'get_emoji_regexp'):
+    if hasattr(emoji, 'get_emoji_regexp'):
         try:
             return emoji.get_emoji_regexp().findall(text)
         except Exception:
@@ -27,7 +27,7 @@ def extract_emojis(text: str):
     emoji_set = set()
     # Newer versions expose EMOJI_DATA
     if hasattr(emoji, 'EMOJI_DATA'):
-        tr:
+        try:
             emoji_set = set(emoji.EMOJI_DATA.keys())
         except Exception:
             pass
@@ -73,8 +73,8 @@ def most_busy_users(df):
     return x, df
 
 def create_wordcloud(selected_user, df):
-    f = open('stop_hinglish.txt', 'r')
-    stop_words = f.read()
+    with open('stop_hinglish.txt', 'r') as f:
+        stop_words = f.read()
 
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
@@ -95,8 +95,8 @@ def create_wordcloud(selected_user, df):
     return df_wc
 
 def most_common_words(selected_user, df):
-    f = open('stop_hinglish.txt', 'r')
-    stop_words = f.read()
+    with open('stop_hinglish.txt', 'r') as f:
+        stop_words = f.read()
 
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
