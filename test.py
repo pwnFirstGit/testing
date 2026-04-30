@@ -6,7 +6,7 @@ def factorial(n):
 try:
     num = 5
     print(f"Factorial of {num} is: {factorial(num)}")
-except RecursionError:
-    print("RecursionError: Infinite recursion detected!")
+except RecursionError as e:
+    print("RecursionError:", e)
 except Exception as e:
     print(f"Error: {e}")
